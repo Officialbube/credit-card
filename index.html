@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/script.js"></script>
+  </head>
+  <body>
+    <section class="main-container">
+      <section class="card-container">
+        <div class="top-card"></div>
+        <div oninput="getNumberValue()" class="show-number"></div>
+        <div class="show-bottom">
+          <div class="card-holder-show">
+            <p class="name"></p>
+            <p>CARD HOLDER</p>
+          </div>
+          <div class="expires-show">
+            <P class="expire"></P>
+            <p>EXPIRES</p>
+          </div>
+        </div>
+      </section>
+      <form class="input-container" id="">
+        <div class="number-holder-container">
+          <label for="" class="number-label">CARD NUMBER</label>
+          <div class="card-input-container">
+            <input type="number" name="" id="num1" class="number" maxlength="4" />
+            <input type="number" name="" id="num2" class="number" maxlength="4"/>
+            <input type="number" name="" id="num3" class="number" maxlength="4"/>
+            <input type="number" name="" id="num4" class="number" maxlength="4"/>
+          </div>
+        </div>
+        <div class="name-holder-container">
+          <label for="">CARD HOLDER</label>
+          <input type="text" oninput="getValue()" name="" pattern="^[a-zA-Z ]+$"  id="nameInput" required/>
+        </div>
+        <div class="bottom-input">
+          <div>
+            <label for="">EXPIRATION DATE</label>
+            <div>
+              <input type="month" name="" id="" />
+            </div>
+          </div>
+          <div class="ccv-container">
+            <label for="">CCV</label>
+            <input type="number" name="" id="" />
+          </div>
+        </div>
+        <button  class="submit">SUBMIT</button>
+      </form>
+    </section>
+    <script>
+      const form = document.getElementById("form");
+      const nameInput = document.getElementById("nameInput");
+      
+      const firstNumber = document.querySelector("#num1");
+
+      const number = document.querySelectorAll('#num1').forEach(input => {
+        input.oninput = () => {
+          if(input.value.length > input.maxLength){
+            input.value = input.value.slice(0, input.maxLength);
+            
+          }
+        }
+      })
+
+      
+
+      
+
+     
+
+      /*const moveCursor = (fromBox, toBox) => {
+        const length = fromBox.value.length;
+        const maxLength = fromBox.getAttribute('maxLength');
+        if(length == maxLength){
+          document.getElementById(toBox).focus()
+        }
+      }*/
+      
+      const getNumberValue = () => {
+        const cardNumber = document.querySelector(".number");
+        const displayNumber = document.querySelector(".show-number");
+
+        let cardNumberValue = cardNumber.value;
+        displayNumber.textContent = cardNumberValue;
+        console.log(cardNumberValue)
+      };
+
+      
+
+      const getValue = () => {
+        const nameInput = document.getElementById("nameInput");
+        const display = document.querySelector(".name");
+
+        let nameInputValue = nameInput.value;
+        display.textContent = nameInputValue;
+        console.log(nameInputValue)
+      };
+    </script>
+  </body>
+</html>
