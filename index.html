@@ -41,7 +41,7 @@
           </div>
         </div>
       </section>
-      <form action="" class="input-container" id="">
+      <form action="/"  class="input-container" id="form">
         <div class="number-holder-container">
           <label for="" class="number-label">CARD NUMBER</label>
           <div class="card-input-container">
@@ -51,6 +51,7 @@
               id="num1"
               class="number"
               maxlength="4"
+              
               required
             />
             <input
@@ -127,10 +128,10 @@
           </div>
           <div class="ccv-container">
             <label for="">CCV</label>
-            <input type="number" name="" id="" minlength="3" maxlength="4" required/>
+            <input type="number" name="" id="ccv" minlength="3" maxlength="4" required/>
           </div>
         </div>
-        <button type="submit" class="submit">SUBMIT</button>
+        <button   type="submit" class="submit">SUBMIT</button>
       </form>
     </section>
     <script>
@@ -146,6 +147,14 @@
       const displayNumber2 = document.querySelector(".show-number2");
       const displayNumber3 = document.querySelector(".show-number3");
       const displayNumber4 = document.querySelector(".show-number4");
+
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        form.submit();
+        alert("Your payment was successful")
+      })
 
       const number = document.querySelectorAll("#num1").forEach((input) => {
         input.oninput = () => {
@@ -174,8 +183,12 @@
           } else if(startingNumber == 3){
             document.querySelector(".american-express").style.display = "block";
            } else{
+            document.querySelector(".mastercard").style.display = "block";
             
           }
+
+        
+      
 
         };
       });
@@ -223,6 +236,8 @@
         };
       });
 
+      
+
       const month = (document.querySelector(".month").oninput = () => {
         document.querySelector(".month-show").textContent =
           document.querySelector(".month").value;
@@ -233,23 +248,8 @@
           document.querySelector(".year").value;
       });
 
-      /*const moveCursor = (fromBox, toBox) => {
-        const length = fromBox.value.length;
-        const maxLength = fromBox.getAttribute('maxLength');
-        if(length == maxLength){
-          document.getElementById(toBox).focus()
-        }
-      }*/
-
-      const getNumberValue = () => {
-        const cardNumber = document.getElementById("num1");
-        const displayNumber = document.querySelector(".show-number");
-
-        let cardNumberValue = cardNumber.value;
-        displayNumber.textContent = cardNumberValue;
-        console.log(cardNumberValue);
-      };
-
+      
+      
       const getValue = () => {
         const nameInput = document.getElementById("nameInput");
         const display = document.querySelector(".name");
@@ -258,6 +258,23 @@
         display.textContent = nameInputValue;
         console.log(nameInputValue);
       };
+
+      const ccv = document.getElementById("ccv");
+      const ccvValue = ccv.value;
+
+      const setError = (element, message) => {
+        const inputControl = element.parentElement;
+        const errorDisplay = inputControl.querySelector('.error');
+
+        errorDisplay.innerText = message;
+        inputControl.classList.add('error');
+        inputControl.classList.remove('success');
+
+      }
+      
+
+      
+      
     </script>
   </body>
 </html>
