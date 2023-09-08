@@ -11,68 +11,227 @@
   <body>
     <section class="main-container">
       <section class="card-container">
-        <div class="top-card"></div>
-        <div oninput="getNumberValue()" class="show-number"></div>
+        <div class="top-card">
+          <div class="card-left">
+            <img src="/logo/icons8-chip-card-80.png" alt="">
+          </div>
+          <div class="card-right">
+            <img src="/logo/pngwing.com (1).png" alt="" class="mastercard">
+            <img src="/logo/pngwing.com.png" alt="" class="visa">
+            <img src="/logo/payment.png" alt="" class="american-express">
+          </div>
+        </div>
+        <div class="show-number-container">
+          <p class="show-number1"></p>
+          <p class="show-number2"></p>
+          <p class="show-number3"></p>
+          <p class="show-number4"></p>
+        </div>
         <div class="show-bottom">
           <div class="card-holder-show">
             <p class="name"></p>
-            <p>CARD HOLDER</p>
+            <p class="show-text">CARD HOLDER</p>
           </div>
           <div class="expires-show">
-            <P class="expire"></P>
-            <p>EXPIRES</p>
+            <p class="expire">
+              <span class="month-show">_</span>/
+              <span class="year-show">_</span>
+            </p>
+            <p class="show-text">EXPIRES</p>
           </div>
         </div>
       </section>
-      <form class="input-container" id="">
+      <form action="" class="input-container" id="">
         <div class="number-holder-container">
           <label for="" class="number-label">CARD NUMBER</label>
           <div class="card-input-container">
-            <input type="number" name="" id="num1" class="number" maxlength="4" />
-            <input type="number" name="" id="num2" class="number" maxlength="4"/>
-            <input type="number" name="" id="num3" class="number" maxlength="4"/>
-            <input type="number" name="" id="num4" class="number" maxlength="4"/>
+            <input
+              type="number"
+              name=""
+              id="num1"
+              class="number"
+              maxlength="4"
+              required
+            />
+            <input
+              type="number"
+              name=""
+              id="num2"
+              class="number"
+              maxlength="4"
+              required
+            />
+            <input
+              type="number"
+              name=""
+              id="num3"
+              class="number"
+              maxlength="4"
+            />
+            <input
+              type="number"
+              name=""
+              id="num4"
+              class="number"
+              maxlength="4"
+              required
+            />
           </div>
         </div>
         <div class="name-holder-container">
           <label for="">CARD HOLDER</label>
-          <input type="text" oninput="getValue()" name="" pattern="^[a-zA-Z ]+$"  id="nameInput" required/>
+          <input
+            type="text"
+            oninput="getValue()"
+            name=""
+            pattern="^[a-zA-Z ]+$"
+            id="nameInput"
+            required
+          />
         </div>
         <div class="bottom-input">
-          <div>
+          <div class="expire-container">
             <label for="">EXPIRATION DATE</label>
-            <div>
-              <input type="month" name="" id="" />
+            <div class="select-container">
+              <select name="" class="month" id="" >
+                <option value="month" selected disabled>month</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+              <select name="" class="year" id="">
+                <option value="year" selected disabled>year</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+                <option value="2032">2032</option>
+                <option value="2033">2033</option>
+                <option value="2034">2034</option>
+                <option value="2035">2035</option>
+              </select>
             </div>
           </div>
           <div class="ccv-container">
             <label for="">CCV</label>
-            <input type="number" name="" id="" />
+            <input type="number" name="" id="" minlength="3" maxlength="4" required/>
           </div>
         </div>
-        <button  class="submit">SUBMIT</button>
+        <button type="submit" class="submit">SUBMIT</button>
       </form>
     </section>
     <script>
       const form = document.getElementById("form");
       const nameInput = document.getElementById("nameInput");
-      
-      const firstNumber = document.querySelector("#num1");
 
-      const number = document.querySelectorAll('#num1').forEach(input => {
+      const firstNumber = document.querySelector("#num1");
+      const cardNumber1 = document.getElementById("num1");
+      const cardNumber2 = document.getElementById("num2");
+      const cardNumber3 = document.getElementById("num3");
+      const cardNumber4 = document.getElementById("num4");
+      const displayNumber1 = document.querySelector(".show-number1");
+      const displayNumber2 = document.querySelector(".show-number2");
+      const displayNumber3 = document.querySelector(".show-number3");
+      const displayNumber4 = document.querySelector(".show-number4");
+
+      const number = document.querySelectorAll("#num1").forEach((input) => {
         input.oninput = () => {
-          if(input.value.length > input.maxLength){
+          if (input.value.length > input.maxLength) {
             input.value = input.value.slice(0, input.maxLength);
+          }
+          const cardNumber1 = document.getElementById("num1");
+          const displayNumber1 = document.querySelector(".show-number1");
+
+          let cardNumberValue = cardNumber1.value;
+          displayNumber1.textContent = cardNumberValue;
+
+          const startingNumber = cardNumberValue[0];
+          if (startingNumber == 2) {
+            document.querySelector(".mastercard").style.display = "block";
+            document.querySelector(".visa").style.display = "none";
+            document.querySelector(".american-express").style.display = "none";
+          }else if(startingNumber == 5) {
+            document.querySelector(".visa").style.display = "none";
+            document.querySelector(".mastercard").style.display = "block";
+            document.querySelector(".american-express").style.display = "none";
+          } else if(startingNumber == 4) {
+            document.querySelector(".visa").style.display = "block";
+            document.querySelector(".mastercard").style.display = "none";
+            document.querySelector(".american-express").style.display = "none";
+          } else if(startingNumber == 3){
+            document.querySelector(".american-express").style.display = "block";
+           } else{
             
           }
-        }
-      })
 
-      
+        };
+      });
 
-      
+      const number2 = document.querySelectorAll("#num2").forEach((input) => {
+        input.oninput = () => {
+          if (input.value.length > input.maxLength) {
+            input.value = input.value.slice(0, input.maxLength);
+          }
+          const cardNumber2 = document.getElementById("num2");
+          const displayNumber2 = document.querySelector(".show-number2");
 
-     
+          let cardNumberValue2 = cardNumber2.value;
+          displayNumber2.textContent = cardNumberValue2;
+          console.log(cardNumberValue);
+        };
+      });
+
+      const number3 = document.querySelectorAll("#num3").forEach((input) => {
+        input.oninput = () => {
+          if (input.value.length > input.maxLength) {
+            input.value = input.value.slice(0, input.maxLength);
+          }
+          const cardNumber3 = document.getElementById("num3");
+          const displayNumber3 = document.querySelector(".show-number3");
+
+          let cardNumberValue3 = cardNumber3.value;
+          displayNumber3.textContent = cardNumberValue3;
+          console.log(cardNumberValue);
+        };
+      });
+
+      const number4 = document.querySelectorAll("#num4").forEach((input) => {
+        input.oninput = () => {
+          if (input.value.length > input.maxLength) {
+            input.value = input.value.slice(0, input.maxLength);
+          }
+          const cardNumber4 = document.getElementById("num4");
+
+          const displayNumber4 = document.querySelector(".show-number4");
+
+          let cardNumberValue4 = cardNumber4.value;
+          displayNumber4.textContent = cardNumberValue4;
+          console.log(cardNumberValue);
+        };
+      });
+
+      const month = (document.querySelector(".month").oninput = () => {
+        document.querySelector(".month-show").textContent =
+          document.querySelector(".month").value;
+      });
+
+      const year = (document.querySelector(".year").oninput = () => {
+        document.querySelector(".year-show").textContent =
+          document.querySelector(".year").value;
+      });
 
       /*const moveCursor = (fromBox, toBox) => {
         const length = fromBox.value.length;
@@ -81,17 +240,15 @@
           document.getElementById(toBox).focus()
         }
       }*/
-      
+
       const getNumberValue = () => {
-        const cardNumber = document.querySelector(".number");
+        const cardNumber = document.getElementById("num1");
         const displayNumber = document.querySelector(".show-number");
 
         let cardNumberValue = cardNumber.value;
         displayNumber.textContent = cardNumberValue;
-        console.log(cardNumberValue)
+        console.log(cardNumberValue);
       };
-
-      
 
       const getValue = () => {
         const nameInput = document.getElementById("nameInput");
@@ -99,7 +256,7 @@
 
         let nameInputValue = nameInput.value;
         display.textContent = nameInputValue;
-        console.log(nameInputValue)
+        console.log(nameInputValue);
       };
     </script>
   </body>
